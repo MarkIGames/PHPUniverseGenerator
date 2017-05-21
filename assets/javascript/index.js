@@ -36,7 +36,7 @@ function init() {
 	controls.rollSpeed = Math.PI / 24;
 	controls.autoForward = false;
 	controls.dragToLook = false;
-
+/*
 	dirLight = new THREE.PointLight( 0xffffff);
 	dirLight.position.set( 0, 0, -100000 );
 	scene.add( dirLight );
@@ -52,7 +52,10 @@ function init() {
 	dirLight = new THREE.PointLight( 0xffffff , 0.33);
 	dirLight.position.set( 32229600, 0, 0 );
 	scene.add( dirLight );
+*/
 
+	addLights()
+	
 	buildPlanets(jsonObject);
 	//scene.add( shipObject );
 
@@ -165,7 +168,10 @@ function render() {
 			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
 			INTERSECTED.material.emissive.setHex( 0xff0000 );
 
-			console.log(mouse.x);
+			console.log(intersects[0].object.name);
+			console.log(intersects[0].object.position.x);
+			console.log(intersects[0].object.position.y);
+			console.log(intersects[0].object.position.z);
 		}
 	} else {
 		if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );

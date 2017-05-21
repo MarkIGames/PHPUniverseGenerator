@@ -30,6 +30,8 @@
 		<script src="assets/libraries/three/math/Box3.js"></script>
 		<script src="assets/libraries/three/math/Sphere.js"></script>
 
+		<link rel="stylesheet" type="text/css" href="assets/css/solar.css">
+		
 		<!-- Asset Loading -->
 
 	</head>
@@ -112,7 +114,7 @@
 
 	$nebulaColors = array('Green','Blue','Red','Orange','Brown','Yellow','Purple','White');
 
-	$_POST['galaxySize'] = 400;
+	$_POST['galaxySize'] = 600;
 
 	$lowEnd  = $_POST['galaxySize'] - 25;
 	$highEnd = $_POST['galaxySize'] + 25;
@@ -328,6 +330,7 @@
 		<script src="assets/javascript/objectManagement.js"></script>
 		<script src="assets/javascript/utilities.js"></script>
 		<script src="assets/javascript/planets2.js"></script>
+		<script src="assets/javascript/lights.js"></script>
 		<script src="assets/javascript/Flycontrols.js"></script>
 		<!-- Game & Animation Engine Loading -->
 		<script src="assets/javascript/index.js"></script>

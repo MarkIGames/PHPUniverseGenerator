@@ -29,13 +29,15 @@ function buildPlanets( jsonObject ) {
 
 		//sunMesh.geometry.computeBoundingSphere();
 
-		sunMesh.name = value.name;
+		sunMesh.name = 'S:' + value.name;
 
 		// Add to our world object lists to iterate over
 		addWorldObject(sunMesh.name, sunMesh);
 
 		scene.add( sunMesh );
 
+		var orbitSpacing = 10;
+		
 		$.each( value.planets, function( key, planetvalue ) {
 
 			var colorString = colorObject[value.star];
@@ -43,8 +45,8 @@ function buildPlanets( jsonObject ) {
 			planetGeo = new THREE.SphereGeometry( (radius * .00005), 10, 10 );
 			planetMesh = new THREE.Mesh( planetGeo, new THREE.MeshLambertMaterial( colorString ) );
 
-			planetMesh.position.x = value.X; //+ (planetvalue.orbit * 100);
-			//var valueX = value.X; // + (planetvalue.orbit * 100)
+			var valueX = value.X + ((planetvalue.orbit + orbitSpacing) / 10);
+			planetMesh.position.x = valueX;
 			planetMesh.position.y = value.Y;
 			planetMesh.position.z = value.Z;
 
@@ -52,29 +54,31 @@ function buildPlanets( jsonObject ) {
 
 			//sunMesh.geometry.computeBoundingSphere();
 
-			planetMesh.name = planetvalue.name;
+			planetMesh.name = 'P:' + planetvalue.name;
 
 			// Add to our world object lists to iterate over
 			addWorldObject(planetMesh.name, planetMesh);
 
 			scene.add( planetMesh );
 
+			orbitSpacing = orbitSpacing + 10;
+			
 			$.each( planetvalue.moons, function( key, moonvalue ) {
 
 				var colorString = colorObject[value.star];
 
-				moonGeo = new THREE.SphereGeometry( (radius * .00001), 10, 10 );
+				moonGeo = new THREE.SphereGeometry( (radius * .00003), 10, 10 );
 				moonMesh = new THREE.Mesh( moonGeo, new THREE.MeshLambertMaterial( colorString ) );
 
-				moonMesh.position.x = value.X; // + (planetvalue.orbit * 100) + 100;
+				moonMesh.position.x = valueX;
 				moonMesh.position.y = value.Y;
-				moonMesh.position.z = value.Z;
+				moonMesh.position.z = value.Z - 1;
 
 				moonMesh.material.color.setHex( colorObject[value.star.toLowerCase()] );
 
 				//sunMesh.geometry.computeBoundingSphere();
 
-				moonMesh.name = moonvalue.name;
+				moonMesh.name = 'M:' + moonvalue.name;
 
 				// Add to our world object lists to iterate over
 				addWorldObject(moonMesh.name, moonMesh);
@@ -86,6 +90,7 @@ function buildPlanets( jsonObject ) {
 		});
 
 	});
+	 
 }
 
 function rotatePlanets( delta ) {
